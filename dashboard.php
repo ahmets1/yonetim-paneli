@@ -39,7 +39,7 @@ include "ahmet.php";
 
 		<!-- LOGO -->
         <div class="headerbar-left">
-			<a href="index.html" class="logo"><img alt="Logo" src="assets/images/logo.png" /> <span>Admin</span></a>
+			<a href="dashboard.php" class="logo"><img alt="Logo" src="assets/images/logo.png" /> <span>Admin</span></a>
         </div>
 
         
@@ -56,15 +56,34 @@ include "ahmet.php";
 			<div id="sidebar-menu">
         
 			<ul>
-
+			
 					<li class="submenu">
-						<a class="active" href="ahmet.php"><i class="fa fa-fw fa-bars"></i><span> Dashboard </span> </a>
+                        <a href="#"><i class="fa fa-fw fa-file-text-o"></i> <span>Form</span> <span class="menu-arrow"></span></a>
+                            <ul class="list-unstyled">
+                                <li><a href="deneme.php">Yangın Formu</a></li>
+								<li><a href="deneme.php">Select2</a></li>
+                                
+                            </ul>
                     </li>
 
 					<li class="submenu">
-                        <a href="charts.html"><i class="fa fa-fw fa-area-chart"></i><span> Charts </span> </a>
+						<a class="active" href="dashboard.php"><i class="fa fa-fw fa-bars"></i><span>Ana Sayfa</span> </a>
+                    </li>
+
+					<li class="submenu">
+                        <a href="charts.php"><i class="fa fa-fw fa-area-chart"></i><span> Analizler </span> </a>
                     </li>
 					
+					<li class="submenu">
+                        <a href="#"><i class="fa fa-fw fa-table"></i> <span> Tablo </span> <span class="menu-arrow"></span></a>
+							<ul class="list-unstyled">
+								<li><a href="tables-basic.php">Ekip Amirleri Tablosu</a></li>
+								<li><a href="tables-datatable.php">Data Tables</a></li>
+							</ul>
+                    </li>
+										
+                    
+
 					
                   
 
@@ -95,11 +114,8 @@ include "ahmet.php";
 						<div class="row">
 									<div class="col-xl-12">
 											<div class="breadcrumb-holder">
-													<h1 class="main-title float-left">Dashboard</h1>
-													<ol class="breadcrumb float-right">
-														<li class="breadcrumb-item">Home</li>
-														<li class="breadcrumb-item active">Dashboard</li>
-													</ol>
+													<h1 class="main-title float-left">İzmir İtfaiyesi Yönetim Paneli</h1>
+													
 													<div class="clearfix"></div>
 											</div>
 									</div>
@@ -174,7 +190,7 @@ include "ahmet.php";
 													<i class="fa fa-bell-o float-right text-white"></i>
 													<h6 class="text-white text-uppercase m-b-20">Bildirimler</h6>
 													<h1 class="m-b-20 text-white counter">
-											<?php
+	<?php
 		$bilgi3=mysqli_query($baglan,"SELECT COUNT(sira_no) FROM yangin");
 		if($bilgi3)
 	{
@@ -201,7 +217,7 @@ include "ahmet.php";
 									<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-9">						
 										<div class="card mb-3">
 											<div class="card-header">
-												<h3><i class="fa fa-line-chart"></i>   Aylara Göre Yangın Sayıları</h3>
+												<h3><i class="fa fa-line-chart"></i>   Aylara Göre Yangın Sayıları(2018)</h3>
 												
 											</div>
 												
@@ -211,7 +227,7 @@ include "ahmet.php";
 											
 										</div><!-- end card-->					
 									</div>
-
+								<!--
 									<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-5">						
 										<div class="card mb-3">
 											<div class="card-header">
@@ -223,7 +239,8 @@ include "ahmet.php";
 												<canvas id="pieChart"></canvas>
 											</div>
 											
-										</div><!-- end card-->					
+										</div>
+															
 									</div>
 									
 									<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-5">						
@@ -237,7 +254,7 @@ include "ahmet.php";
 												<canvas id="doughnutChart"></canvas>
 											</div>
 											
-										</div><!-- end card-->					
+										</div>					
 									</div>
 									
 									
@@ -258,7 +275,7 @@ include "ahmet.php";
     </div>
 	<!-- END content-page -->
     
-	
+	</div>
 
 </div>
 <!-- END main -->
@@ -301,18 +318,21 @@ include "ahmet.php";
 	</script>
 	
 	<script>
+	
 	var ctx1 = document.getElementById("lineChart").getContext('2d');
 	var lineChart = new Chart(ctx1, {
 		type: 'bar',
 		data: {
 			labels: ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"],
 			datasets: [{
-					label: 'Aylara Göre Yangın Sayıları',
+					label: 'Aylara Göre Yangın Sayıları(2018)',
 					backgroundColor: '#3EB9DC',
 					data: [
 					<?php
-					$ay=mysqli_query($baglan,"SELECT COUNT(kayit_no) FROM yangin WHERE kayit_tarihi LIKE '_____01 %'");
+					
+					$ay=mysqli_query($baglan,"SELECT COUNT(kayit_no) FROM yangin WHERE kayit_tarihi LIKE '_____01%'");
 		if($ay)
+
 	{
         $sayi=mysqli_fetch_array($ay);    
         echo $sayi["0"];
